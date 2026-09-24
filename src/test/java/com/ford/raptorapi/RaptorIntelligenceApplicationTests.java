@@ -1,10 +1,8 @@
 package com.ford.raptorapi;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class RaptorIntelligenceApplicationTests {
+class RaptorIntelligenceApplicationTests extends BaseTest {
 
     @Test
     void contextLoads() {

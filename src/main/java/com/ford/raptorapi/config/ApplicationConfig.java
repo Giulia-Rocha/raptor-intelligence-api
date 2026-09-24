@@ -21,15 +21,8 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> {
-            System.out.println("EMAIL RECEBIDO: " + username);
-
-            return userRepository.findByEmail(username)
-                    .orElseThrow(() -> {
-                        System.out.println("USUARIO NAO ENCONTRADO");
-                        return new UsernameNotFoundException("User not found");
-                    });
-        };
+        return username -> userRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
     @Bean

@@ -1,6 +1,7 @@
 package com.ford.raptorapi.service;
 
 import com.ford.raptorapi.dto.response.*;
+import com.ford.raptorapi.exception.ResourceNotFoundException;
 import com.ford.raptorapi.mapper.VehicleMapper;
 import com.ford.raptorapi.model.SpecCategoryMap;
 import com.ford.raptorapi.model.Vehicle;
@@ -33,7 +34,19 @@ public class CompareService {
     );
 
     public CompareResponse compare(List<Integer> ids, List<String> categories) {
+        if (ids == null || ids.isEmpty()) {
+            throw new IllegalArgumentException("Informe ao menos um id de veículo no parâmetro 'ids'");
+        }
+
         List<Vehicle> vehicles = vehicleRepository.findAllById(ids);
+
+        if (vehicles.size() != new HashSet<>(ids).size()) {
+            List<Integer> found = vehicles.stream().map(Vehicle::getId).toList();
+            List<Integer> missing = new HashSet<>(ids).stream()
+                    .filter(id -> !found.contains(id))
+                    .toList();
+            throw new ResourceNotFoundException("Veículo(s) não encontrado(s): " + missing);
+        }
 
         List<SpecCategoryMap> mappings = (categories == null || categories.isEmpty())
                 ? specCategoryMapRepository.findAll()
@@ -199,11 +212,16 @@ public class CompareService {
     private String toCamelCase(String snakeCase) {
         String[] parts = snakeCase.split("_");
         StringBuilder result = new StringBuilder(parts[0]);
+        boolean numericPrefix = parts[0].chars().anyMatch(Character::isDigit);
         for (int i = 1; i < parts.length; i++) {
-            if (!parts[i].isEmpty()) {
+            if (parts[i].isEmpty()) continue;
+            if (numericPrefix) {
+                result.append(parts[i]);
+            } else {
                 result.append(Character.toUpperCase(parts[i].charAt(0)));
                 result.append(parts[i].substring(1));
             }
+            numericPrefix = parts[i].chars().anyMatch(Character::isDigit);
         }
         return result.toString();
     }

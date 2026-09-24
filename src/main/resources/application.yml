@@ -19,5 +19,13 @@ server:
   port: 8080
 
 jwt:
-  secret: sua-chave-secreta-256bits-aqui-trocar-em-producao
-  expiration: 86400000
+  # Segredo injetado por variável de ambiente (ver docker-compose.yml).
+  # O default abaixo é apenas para desenvolvimento local.
+  secret: ${JWT_SECRET:sua-chave-secreta-256bits-aqui-trocar-em-producao}
+  expiration: ${JWT_EXPIRATION:86400000} # ms -> 24h
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs

@@ -2,8 +2,10 @@ package com.ford.raptorapi.mapper;
 
 import com.ford.raptorapi.dto.response.*;
 import com.ford.raptorapi.model.*;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring")
@@ -18,9 +20,18 @@ public interface VehicleMapper {
     @Mapping(target = "drivetrainSpecs", source = "drivetrainSpecs")
     @Mapping(target = "suspensionSpecs", source = "suspensionSpecs")
     @Mapping(target = "dimensions", source = "dimensions")
-    @Mapping(target = "dimensions.fuelTankCapacity", source = "engineSpecs.tankCapacityLiters")
     @Mapping(target = "warranty", source = "warranty")
     VehicleDetailResponse toDetailResponse(Vehicle vehicle);
+
+    @AfterMapping
+    default void injectFuelTankCapacity(Vehicle vehicle, @MappingTarget VehicleDetailResponse response) {
+        if (response.getDimensions() != null
+                && vehicle.getEngineSpecs() != null
+                && vehicle.getEngineSpecs().getTankCapacityLiters() != null) {
+            response.getDimensions()
+                    .setFuelTankCapacity(String.valueOf(vehicle.getEngineSpecs().getTankCapacityLiters()));
+        }
+    }
 
     BrandResponse toResponse(Brand brand);
 

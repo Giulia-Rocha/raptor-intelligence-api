@@ -34,8 +34,10 @@ public class AuthService {
 
         AuthResponse response = new AuthResponse();
         response.setToken(jwtToken);
+        response.setExpiresIn(jwtService.getExpirationMillis() / 1000);
         response.setName(user.getName());
         response.setDealership(user.getDealership());
+        response.setRole(user.getRole().name());
 
         return response;
     }
