@@ -17,6 +17,7 @@ spring:
 
 server:
   port: ${PORT:8080}
+  forward-headers-strategy: framework
 
 jwt:
   # Segredo injetado por variável de ambiente (ver docker-compose.yml).
