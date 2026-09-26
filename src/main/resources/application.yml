@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/raptor_intelligence
-    username: raptor
-    password: raptor123
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/raptor_intelligence}
+    username: ${SPRING_DATASOURCE_USERNAME:raptor}
+    password: ${SPRING_DATASOURCE_PASSWORD:raptor123}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -16,7 +16,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 jwt:
   # Segredo injetado por variável de ambiente (ver docker-compose.yml).
