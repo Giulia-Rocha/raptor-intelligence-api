@@ -11,8 +11,11 @@ A arquitetura é escalável e **Spec Driven Development**: o comparativo `/compa
 ## Integrantes
 
 Giulia Rocha- RM 558084
+
 Gabriel Danius - RM 555747
+
 Caio Rossini - RM 555084
+
 Carlos Eduardo - RM 556785
  
 ## 🛠️ Stack Tecnológico
