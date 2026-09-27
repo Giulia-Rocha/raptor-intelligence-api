@@ -7,6 +7,13 @@ A **Raptor Intelligence API** é o backend oficial (escrito em Java e Spring Boo
 O objetivo principal desta API é fornecer dados técnicos precisos, estruturados e facilmente comparáveis de veículos (tanto da Ford, com destaque para a Ranger Raptor, quanto de seus concorrentes). A API gerencia a autenticação, o catálogo de veículos, as especificações organizadas por categorias dinâmicas e o histórico de comparações do consultor.
  
 A arquitetura é escalável e **Spec Driven Development**: o comparativo `/compare` é montado dinamicamente a partir da tabela `spec_category_map`, permitindo adicionar categorias e especificações puramente via banco de dados, sem novo deploy.
+
+## Integrantes
+
+Giulia Rocha- RM 558084
+Gabriel Danius - RM 555747
+Caio Rossini - RM 555084
+Carlos Eduardo - RM 556785
  
 ## 🛠️ Stack Tecnológico
  
