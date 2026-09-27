@@ -153,7 +153,7 @@ A cobertura é medida com o plugin **JaCoCo** (relatório gerado em `target/site
  
 A suíte completa (32 testes) foi executada com sucesso:
  
-![Resultado dos testes](docs/test-results.png)
+![Resultado dos testes](test.png)
  
 ```
 Tests run: 32, Failures: 0, Errors: 0, Skipped: 0
